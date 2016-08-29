@@ -1,0 +1,22 @@
+{
+  "presets": [
+    "es2015", "stage-0"
+  ],
+  "plugins": [
+    "transform-runtime",
+    "add-module-exports"
+  ],
+  "env": {
+    "production": {
+      "presets": [
+        "es2015",
+        "stage-0",
+        "babili"
+      ],
+      "plugins": [
+        "transform-runtime",
+        "add-module-exports"
+      ]
+    }
+  }
+}
