@@ -47,14 +47,18 @@ class LinterTslint {
         if (dir && path.isAbsolute(dir)) {
           if (this.__TEST__) {
             try {
-              fs.statSync(dir);
-              this.userConfig.rulesDirectory = dir;
+              const stats = fs.statSync(dir);
+              if (stats && stats.isDirectory()) {
+                this.userConfig.rulesDirectory = dir;
+              }
             } catch (er) {
               console.log(`[${CONSOLE_PLUGIN_NAME}] -`, er);
             }
           } else {
-            fs.stat(dir, (err, stats) => {
-              if (stats && stats.isDirectory()) {
+            fs.stat(dir, (er, stats) => {
+              if (er) {
+                console.log(`[${CONSOLE_PLUGIN_NAME}] -`, er);
+              } else if (stats && stats.isDirectory()) {
                 this.userConfig.rulesDirectory = dir;
               }
             });
