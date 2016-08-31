@@ -1,11 +1,17 @@
+/* eslint no-console: 0 */
 // eslint-disable-next-line
 import { CompositeDisposable } from 'atom';
 import path from 'path';
 import fs from 'fs';
 import { spawnWorker, showError } from './helpers';
-import { PACKAGE_NAME } from './constants';
+import {
+  PACKAGE_NAME,
+  CONSOLE_PLUGIN_NAME
+} from './constants';
 
 class LinterTslint {
+
+  static __TEST__ = false
 
   config = {
     rulesDirectory: {
@@ -39,11 +45,20 @@ class LinterTslint {
       .subscriptions
       .add(atom.config.observe(`${PACKAGE_NAME}.rulesDirectory`, dir => {
         if (dir && path.isAbsolute(dir)) {
-          fs.stat(dir, (err, stats) => {
-            if (stats && stats.isDirectory()) {
+          if (this.__TEST__) {
+            try {
+              fs.statSync(dir);
               this.userConfig.rulesDirectory = dir;
+            } catch (er) {
+              console.log(`[${CONSOLE_PLUGIN_NAME}] -`, er);
             }
-          });
+          } else {
+            fs.stat(dir, (err, stats) => {
+              if (stats && stats.isDirectory()) {
+                this.userConfig.rulesDirectory = dir;
+              }
+            });
+          }
         }
       }));
 

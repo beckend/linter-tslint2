@@ -1,11 +1,11 @@
 {
-  "name": "linter-tslint2",
+  "name": "linter-tslint",
   "main": "./lib/main.js",
   "linter-package": true,
   "version": "0.1.0",
   "description": "Linter plugin for typescript, using tslint. Written in es6, inspired by linter-tslint, linter-eslint, linter-jshint",
   "keywords": [],
-  "repository": "https://github.com/beckend/linter-tslint2",
+  "repository": "https://github.com/beckend/linter-tslint",
   "license": "MIT",
   "scripts": {
     "test": "apm test",

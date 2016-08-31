@@ -1,11 +1,10 @@
+/* eslint no-console: 0 */
 // eslint-disable-next-line
 import { Disposable } from 'atom';
 import ChildProcess from 'child_process';
 import { createFromProcess } from 'process-communication';
 import { join } from 'path';
 import { CONSOLE_PLUGIN_NAME } from './constants';
-
-/* eslint no-console: 0 */
 
 export function spawnWorker() {
   const env = Object.create(process.env);
